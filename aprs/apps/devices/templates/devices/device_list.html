@@ -1,0 +1,38 @@
+<table class="table table-striped">
+    <thead>
+        <th>
+            Name
+        </th>
+        <th>
+            Owner
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            Last Seen
+        </th>
+    </thead>
+    <tbody>
+        {% for object in object_list %}
+            <tr>
+                <td>
+                    {{ object.name }}
+                </td>
+                <td>
+                    {{ object.owner }}
+                </td>
+                <td>
+                    {{ object.get_status_display }}
+                </td>
+                <td>
+                    {% if object.last_communicated_time %}
+                        {{ object.last_communicated_time }}
+                    {% else %}
+                        Never
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

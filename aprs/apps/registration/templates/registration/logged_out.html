@@ -1,0 +1,13 @@
+{% extends "common/base.html" %}
+
+{% load bootstrap4 %}
+
+{% block content %}
+    <div class="card" style="margin-top: 10%;">
+        <div class="card-body">
+            <h5 class="card-title">Logged out</h5>
+            <p>You have now logged out;</p>
+            <a class="btn btn-primary" href="{% url 'login' %}">Go to login</a>
+        </div>
+    </div>
+{% endblock %}

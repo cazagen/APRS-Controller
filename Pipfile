@@ -1,0 +1,16 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[packages]
+django = "*"
+django-bootstrap4 = "*"
+
+[scripts]
+serve = "python3 manage.py runserver 0:8000"
+
+[requires]
+python_version = "3.7"
+
+[dev-packages]

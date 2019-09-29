@@ -1,0 +1,75 @@
+{% extends "common/base.html" %}
+
+{% block content %}
+    <div class="card" style="margin-top: 10%;">
+        <div class="card-body">
+            <h5 class="card-title">System</h5>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-3 card" id="devices-status-display" style="background-color: lime;">
+                    <div class="d-flex justify-content-center">
+                        <div class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    function refreshDeviceStatuses(initial) {
+                        $.ajax({
+                            'method': 'GET',
+                            'url': '{% url "all_device_statuses" %}'
+                        }).done((resp) => {
+                            var deviceStatuses = $('#devices-status-display');
+
+                            deviceStatuses.empty().append(resp);
+
+                            if (initial) {
+                                deviceStatuses.hide().slideDown(1000);
+                            }
+                        });
+                        setTimeout(refreshDeviceStatuses, 10000);
+                    }
+                    refreshDeviceStatuses(true);
+                </script>
+                <div class="col-md-2"></div>
+                <div class="col-md-3 card" style="background-color: blue;">
+                    <div class="card-body" style="color: white; text-align: center">
+                        No new system notifications
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" style="margin-top: 10%;">
+        <div class="card-body">
+            <h5 class="card-title">Device status</h5>
+            <div class="card-body">
+                <script>
+                    function refreshMyDevices(initial) {
+                        $.ajax({
+                            'method': 'GET',
+                            'url': '{% url "list_devices" %}'
+                        }).done((resp) => {
+                            var myDevices = $('#devices-list');
+
+                            myDevices.empty().append(resp);
+                            
+                            if (initial) {
+                                myDevices.hide().slideDown(1000);
+                            }
+                        });
+                        setTimeout(refreshMyDevices, 10000);
+                    }
+                    refreshMyDevices(true);
+                </script>
+                <div id="devices-list">
+                    <div class="d-flex justify-content-center">
+                        <div class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}
